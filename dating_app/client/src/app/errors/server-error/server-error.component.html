@@ -1,0 +1,14 @@
+<div class="container">
+    <h1>Internal Server Error</h1>
+    @if (error) {
+        <h5 class ="text-danger">{{error.message}}</h5> 
+        <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corrupti.</p>
+    }
+    <ol>
+        <li>Lorem ipsum dolor sit amet.</li>
+        <li>Lorem ipsum dolor sit amet consectetur adipisicing elit.</li>
+        <li>Lorem ipsum dolor sit amet consectetur adipisicing.</li>
+    </ol>
+    <h5>follow the first 2 lines at the stack trace</h5>
+    <p class="text-danger">{{error.details}}</p>
+</div>
