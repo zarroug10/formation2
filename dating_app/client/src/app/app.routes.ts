@@ -10,17 +10,23 @@ import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { preveventUnsavedChangesGuard } from './_guards/prevevent-unsaved-changes.guard';
+import { memberDetailedResolver } from './_resolvers/member-detailed.resolver';
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
+import { adminGuard } from './_guards/admin.guard';
 
 export const routes: Routes = [
     {path:'',component:HomeComponent},
     {path:'',
-        runGuardsAndResolvers:'always',canActivate:[authGuard],children:[
+        runGuardsAndResolvers:'always',
+        canActivate:[authGuard],children:[
             {path:'members',component:MembersListComponent},
-            {path:'members/:username',component:MemberDetailsComponent},
+            {path:'members/:username',component:MemberDetailsComponent,
+                resolve:{member:memberDetailedResolver}},
             {path:'member/edit',component:MemberEditComponent, 
                 canDeactivate:[preveventUnsavedChangesGuard]},
             {path:'lists',component:ListsComponent},
             {path:'messages',component:MessagesComponent},
+            {path:'admin',component:AdminPanelComponent,canActivate:[adminGuard]},
         ]
     },
     {path:'errors',component:TestErrorsComponent},

@@ -12,20 +12,20 @@
                 class="form-control ms-1"
                  style="width:70px ;"
                  name="minAge"
-                 [(ngModel)]="userParams.minAge">
+                 [(ngModel)]="memberservice.userParams().minAge">
                  <label class="col-form-label">Age to</label>
                  <input type="number" 
                  class="form-control ms-1"
                   style="width:70px ;"
                   name="maxAge"
-                  [(ngModel)]="userParams.maxAge">
+                  [(ngModel)]="memberservice.userParams().maxAge">
             </div>
             <div class="d-flex mx-2">
                 <label class="col-form-label">Show:</label>
                 <select name="gender"
                  style="width: 130px;" 
                 class="form-select ms-1"
-                [(ngModel)]="userParams.gender"
+                [(ngModel)]="memberservice.userParams().gender"
                 >
                 @for (gender of genderList; track gender.value) {
                     <option [value]="gender.value">
@@ -44,7 +44,7 @@
                     class="btn btn-outline-success"
                     name="orderBy"
                     btnRadio="lastActive"
-                    [(ngModel)]="userParams.orderBy"
+                    [(ngModel)]="this.memberservice.userParams().orderBy"
                     (click)="loadMembers()">
                         Last Active
                     </button>
@@ -53,7 +53,7 @@
                         class="btn btn-outline-success"
                         name="orderBy"
                         btnRadio="created"
-                        [(ngModel)]="userParams.orderBy"
+                        [(ngModel)]="this.memberservice.userParams().orderBy"
                         (click)="loadMembers()">
                             Created
                         </button>
@@ -74,6 +74,7 @@
     [totalItems]="memberservice.paginatedResults()?.pagination!.totalItems"
     [itemsPerPage]="memberservice.paginatedResults()?.pagination!.itemPerPage"
     (pageChanged)="Pagechanged($event)"
+    [(ngModel)]="memberservice.paginatedResults()?.pagination!.currentPage"
     [maxSize]="10"
     previousText="&lsaquo;" 
     nextText="&rsaquo;" 

@@ -1,13 +1,12 @@
 using System.Text;
-using API.Data;
-using API.Extensions;
-using API.interfaces;
-using API.Middleware;
-using API.Services;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
+using API.SignalR;
+using API.Data;
+using API.Entities;
+using API.Extensions;
+using API.Middleware;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,20 +21,26 @@ app.UseMiddleware<MiddlewareExceptions>();
 app.UseCors(x => x
     .AllowAnyMethod()
     .AllowAnyHeader()
+    .AllowCredentials()
     .WithOrigins("http://localhost:4200", "https://localhost:4200"));
     
 app.UseAuthentication();
 app.UseAuthorization();    
 
 app.MapControllers();
+app.MapHub<PresenceHub>("hubs/presence");
+app.MapHub<MessageHub>("hubs/message");
 
 using var scope = app.Services.CreateScope();
 var service = scope.ServiceProvider;
 try
 {
     var context = service.GetRequiredService<DataContext>();
+    var userManager = service.GetRequiredService<UserManager<AppUser>>();
+    var roleManager = service.GetRequiredService<RoleManager<AppRole>>();
     await context.Database.MigrateAsync();
-    await Seed.SeedUsers(context);
+    await context.Database.ExecuteSqlRawAsync("DELETE FROM [Connections]");
+    await Seed.SeedUsers(userManager,roleManager);
 }
 catch (Exception ex)
 {

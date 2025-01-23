@@ -6,7 +6,7 @@ namespace API.Extensions;
 
 public  static class HttExtensions
 {
-     public static void AddPAgincationHeader<T> (this HttpResponse response,
+     public static void AddPaginationHeader<T> (this HttpResponse response,
      pagedList<T> data )
      {
         var paginationheader = new PaginationHeader(data.CurrentPage, data.PageSize

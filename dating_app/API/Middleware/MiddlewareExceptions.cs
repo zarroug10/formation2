@@ -17,7 +17,7 @@ public class MiddlewareExceptions(RequestDelegate next ,ILogger<MiddlewareExcept
         catch (Exception ex) // cathcing the exceptions which is here the errors 
         {
             logger.LogError(ex,ex.Message); // logger here is used to display the error message
-            context.Response.ContentType = "application/json"; // decalrong the type of the content Type of the response 
+            context.Response.ContentType = "application/json"; // decalring the type of the content Type of the response 
             context.Response.StatusCode= (int)HttpStatusCode.InternalServerError; // decalring the Status code of response 
 
             var response = env.IsDevelopment() // place holder for the environment of the host if it's in dev

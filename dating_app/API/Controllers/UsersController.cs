@@ -9,7 +9,6 @@ using API.interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers; //name space is valuable for creating a connected files without the name space the file is not visivble toeach other
 
@@ -18,6 +17,8 @@ namespace API.Controllers; //name space is valuable for creating a connected fil
 [Authorize]
 public class UsersController(IUserRepository userRepository, IMapper mapper, IPhotoService photoService) : BaseApiCOntroller //here we re using the encapsuklation where we created a basedapicontroller 
 {
+
+
    [HttpGet] //get
    public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers([FromQuery]UserParms userParams)
    { //function for retreaving the list of users with the async 
@@ -25,12 +26,11 @@ public class UsersController(IUserRepository userRepository, IMapper mapper, IPh
       userParams.Currentusername = User.GetUsername();
       var users = await userRepository.GetMembersAsync(userParams);//to Listasync is to create a list of the datta retreaved
 
-      Response.AddPAgincationHeader(users);
+      Response.AddPaginationHeader(users);
 
       return Ok(users);
    }
 
-   [Authorize]//protected api
    [HttpGet("{id:int}")] //get wuth the routing id as it's dynamic route
    public async Task<ActionResult<IEnumerable<MemberDto>>> GetUserbyId(int id)
    { //methode to get a specofc user by it's id 
@@ -41,7 +41,7 @@ public class UsersController(IUserRepository userRepository, IMapper mapper, IPh
       return Ok(user);//else the user data is returned (200)
    }
 
-   [Authorize]//protected api
+
    [HttpGet("{username}")] //get wuth the routing id as it's dynamic route
    public async Task<ActionResult<MemberDto>> GetUserbyUsername(string username)
    {

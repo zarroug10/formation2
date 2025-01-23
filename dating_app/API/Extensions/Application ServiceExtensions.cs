@@ -3,6 +3,7 @@ using API.Data;
 using API.Helpers;
 using API.interfaces;
 using API.Services;
+using API.SignalR;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Extensions;// name sapce that makes all the files containing it visible to one another
@@ -21,9 +22,13 @@ public static class Application_ServiceExtensions
         services.AddScoped<ITokenService, TokenService>(); // we are using the addScoped to add the Itoken service token service to it.so they be reused throughout the life time of the scope
         services.AddScoped<IUserRepository, UserRepository>(); 
         services.AddScoped<IPhotoService, PhotoService>(); 
+        services.AddScoped<ILikesRepository,LikesRepository>();
+        services.AddScoped<IMessageRepository,MessageRepository>();
         services.AddScoped<LogUserActivity>(); 
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies()); 
         services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings")); 
+        services.AddSignalR();
+        services.AddSingleton<PresenceTracker>();
         
         return  services;
     }

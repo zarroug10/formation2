@@ -7,11 +7,13 @@ import { RouterLink } from '@angular/router';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { ToastrService } from 'ngx-toastr';
 import { PhotoEditorComponent } from "../photo-editor/photo-editor.component";
+import { TimeagoModule } from 'ngx-timeago';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-member-edit',
   standalone: true,
-  imports: [FormsModule, RouterLink, TabsModule, PhotoEditorComponent],
+  imports: [FormsModule, RouterLink, TabsModule, PhotoEditorComponent,TimeagoModule,DatePipe],
   templateUrl: './member-edit.component.html',
   styleUrl: './member-edit.component.css'
 })
