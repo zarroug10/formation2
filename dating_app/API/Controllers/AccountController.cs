@@ -53,6 +53,8 @@ ITokenService tokenService,
         
         if (user == null || user.UserName == null) return Unauthorized("Invalid username");// if he doesn't exist exist tehen it is not authorized
 
+        var isPasswordValid = await userManager.CheckPasswordAsync(user, loginDto.Password);
+        if (!isPasswordValid) return Unauthorized("Invalid password");
 
         return new UserDTO
         {

@@ -22,5 +22,9 @@ public class AppUser : IdentityUser<int>
     public List<Message> MessagesSent {get; set;} = [];
     public List<Message> MessagesRecieved {get; set;} = [];
     public ICollection<AppUserRole> UserRoles {get; set;}= [];
-    
+
+    public static implicit operator bool(AppUser? v)
+    {
+        throw new NotImplementedException();
+    }
 }

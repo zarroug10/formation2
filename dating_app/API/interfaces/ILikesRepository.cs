@@ -7,7 +7,6 @@ namespace API.interfaces;
 
 public interface ILikesRepository
 {
-    Task<bool> SaveChanges();
     Task<UserLike?> GetUserLikeint(int sourceUserId, int torgetUserId );
     Task<pagedList<MemberDto>> GetUserLikes(LikesParams likesParams);
 

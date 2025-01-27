@@ -21,6 +21,7 @@ export class MessageService {
   hubUrl= environment.hubsUrl;
   hubConnection?: HubConnection;
   messagethread = signal<Message[]> ([]);
+  unreadMessageCount = signal<number>(0); 
 
 
   CreateHubConnection(user:User,otherUsername:string) {
@@ -41,11 +42,11 @@ export class MessageService {
       this.messagethread.update(messages => [...messages, message])
     })
 
-    this.hubConnection.on("UpdatedGroup",(group:Group)=> {
-      if(group.connections.some(x=> x.username === otherUsername)){
+    this.hubConnection.on('UpdatedGroup', (group: Group) => {
+      if (group.connections.some(x => x.username === otherUsername)) {
         this.messagethread.update(messages => {
-          messages.forEach(message =>{
-            if(!message.dateRead){
+          messages.forEach(message => {
+            if (!message.dateRead) {
               message.dateRead = new Date(Date.now());
             }
           })

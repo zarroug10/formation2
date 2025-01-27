@@ -11,6 +11,7 @@ import { MessageService } from '../../_services/message.service';
 import { PresenceService } from '../../_services/presence.service';
 import { AccountService } from '../../_services/account.service';
 import { HubConnectionState } from '@microsoft/signalr';
+import { MembersService } from '../../_services/members.service';
 
 @Component({
   selector: 'app-member-details',
@@ -22,10 +23,10 @@ import { HubConnectionState } from '@microsoft/signalr';
 })
 export class MemberDetailsComponent implements OnInit , OnDestroy {
   @ViewChild('memberTabs', { static: true }) memberTabs?: TabsetComponent
-  private routes = inject(ActivatedRoute)
-  private router = inject(Router)
-   presenceservice = inject(PresenceService)
-  private messageservice = inject(MessageService)
+  private routes = inject(ActivatedRoute);
+  private router = inject(Router);
+   presenceservice = inject(PresenceService);
+   messageservice = inject(MessageService)
   private accountservice = inject(AccountService);
   member: Member = {} as Member;
   images: GalleryItem[] = [];
@@ -39,10 +40,6 @@ export class MemberDetailsComponent implements OnInit , OnDestroy {
           this.images.push(new ImageItem({ src: p.url, thumb: p.url }))
         })
       }
-    })
-
-    this.routes.paramMap.subscribe({
-      next:_ => this.onRouteParamsChange()
     })
 
     this.routes.queryParams.subscribe({

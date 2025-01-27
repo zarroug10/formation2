@@ -21,6 +21,7 @@ public static class Application_ServiceExtensions
         services.AddCors(); // adding the cors 
         services.AddScoped<ITokenService, TokenService>(); // we are using the addScoped to add the Itoken service token service to it.so they be reused throughout the life time of the scope
         services.AddScoped<IUserRepository, UserRepository>(); 
+        services.AddScoped<IPhotoRepository,PhotoRepository>(); 
         services.AddScoped<IPhotoService, PhotoService>(); 
         services.AddScoped<ILikesRepository,LikesRepository>();
         services.AddScoped<IMessageRepository,MessageRepository>();
@@ -29,6 +30,7 @@ public static class Application_ServiceExtensions
         services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings")); 
         services.AddSignalR();
         services.AddSingleton<PresenceTracker>();
+        services.AddScoped<IUnitOfWork,UnitOfWork>();
         
         return  services;
     }

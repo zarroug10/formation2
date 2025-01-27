@@ -16,7 +16,7 @@ public class AutoMapperProfiles : Profile
             .ForMember(d => d.PhotoUrl, // the member that need to map
             o => o.MapFrom(//source to map from
                 s => s.Photos.FirstOrDefault(//lamda expression to see if the url is empty
-                    x => x.IsMain)!.Url));                                     //createMap<from,to>
+                    x => x.IsMain)!.Url));                                     
         CreateMap<Photo,PhotoDTO>();            //createMap<from,to>
         CreateMap<MemberUpadteDTO,AppUser>();
         CreateMap<AcountDto,AppUser>();

@@ -15,16 +15,16 @@ namespace API.Controllers; //name space is valuable for creating a connected fil
 
 
 [Authorize]
-public class UsersController(IUserRepository userRepository, IMapper mapper, IPhotoService photoService) : BaseApiCOntroller //here we re using the encapsuklation where we created a basedapicontroller 
+public class UsersController(IUnitOfWork unitOfWork, IMapper mapper, IPhotoService photoService) : BaseApiCOntroller //here we re using the encapsuklation where we created a basedapicontroller 
 {
 
 
    [HttpGet] //get
-   public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers([FromQuery]UserParms userParams)
+   public async Task<ActionResult<IEnumerable<MemberDto>>> GetUsers([FromQuery] UserParms userParams)
    { //function for retreaving the list of users with the async 
 
       userParams.Currentusername = User.GetUsername();
-      var users = await userRepository.GetMembersAsync(userParams);//to Listasync is to create a list of the datta retreaved
+      var users = await unitOfWork.UserRepository.GetMembersAsync(userParams);//to Listasync is to create a list of the datta retreaved
 
       Response.AddPaginationHeader(users);
 
@@ -34,7 +34,7 @@ public class UsersController(IUserRepository userRepository, IMapper mapper, IPh
    [HttpGet("{id:int}")] //get wuth the routing id as it's dynamic route
    public async Task<ActionResult<IEnumerable<MemberDto>>> GetUserbyId(int id)
    { //methode to get a specofc user by it's id 
-      var user = await userRepository.GetUserByIdAsync(id);//findasync is to finds an entity with the given key value (id) and it can return return the entity immediatly if the it's already teacked by the context
+      var user = await unitOfWork.UserRepository.GetUserByIdAsync(id);//findasync is to finds an entity with the given key value (id) and it can return return the entity immediatly if the it's already teacked by the context
       if (user == null) return NotFound(); // if the user is null the result would be Notfound (404)
 
 
@@ -45,8 +45,10 @@ public class UsersController(IUserRepository userRepository, IMapper mapper, IPh
    [HttpGet("{username}")] //get wuth the routing id as it's dynamic route
    public async Task<ActionResult<MemberDto>> GetUserbyUsername(string username)
    {
+      var currentUsername = User.GetUsername();
       // Attempt to retrieve user information from the repository
-      var user = await userRepository.GetMemberAsync(username);
+      var user = await unitOfWork.UserRepository.GetMemberAsync(username,
+      isCurrentUser: currentUsername == username);
 
       // If user is not found, return a 404 Not Found response
       if (user == null)
@@ -57,77 +59,93 @@ public class UsersController(IUserRepository userRepository, IMapper mapper, IPh
    }
 
    [HttpPut]
+   // Asynchronous action method that updates the current user.
+   // <summary> Updates the current user's information. </summary>
    public async Task<ActionResult> UpdateUser(MemberUpadteDTO member)
    {
-      var user = await userRepository.GetUserByUsernameAsync(User.GetUsername());
-      if (user == null) return BadRequest("User is not found");
+      // Retrieve the user from the repository using their username.
+      var user = await unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
 
+      // Return a bad request if the user is not found.
+      if (user == null) return BadRequest("User not found");
+
+      // Map the updated member data to the user entity.
       mapper.Map(member, user);
-      if (await userRepository.SaveAllAsync()) return NoContent();
-      return BadRequest("Failed to Update the user");
+
+      // Save changes to the repository and return NoContent if successful.
+      if (await unitOfWork.Complete()) return NoContent();
+
+      // Return a bad request if the update operation fails.
+      return BadRequest("Failed to update the user");
    }
 
    [HttpPost("add-photo")]
-   public async Task<ActionResult<PhotoDTO>> UploadPhoto(IFormFile file)
+   public async Task<ActionResult<PhotoDTO>> AddPhoto(IFormFile file)
    {
-      if (file == null) return BadRequest("No file provided");
+      var user = await
+     unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
+      if (user == null) return BadRequest("Cannot update user");
+      var result = await photoService.AddPhotoAsync(file);
 
-      var user = await userRepository.GetUserByUsernameAsync(User.GetUsername());
-      if (user == null) return BadRequest("No user Has been Found");
-
-      var results = await photoService.AddPhotoAsync(file);
-      if (results.Error != null) return BadRequest(results.Error.Message);
-
-
+      if (result.Error != null) return BadRequest(result.Error.Message);
       var photo = new Photo
       {
-         Url = results.SecureUrl.AbsoluteUri,
-         PublicId = results.PublicId,
+         Url = result.SecureUrl.AbsoluteUri,
+         PublicId = result.PublicId
       };
-      if (user.Photos.Count == 0) photo.IsMain = true;
-
-
       user.Photos.Add(photo);
-
-      if (await userRepository.SaveAllAsync())
+      if (await unitOfWork.Complete())
          return CreatedAtAction(nameof(GetUserbyUsername),
          new { username = user.UserName }, mapper.Map<PhotoDTO>(photo));
-      return BadRequest("Error while Uploading the photo");
+      return BadRequest("Problem adding photo");
    }
 
 
    [HttpPut("set-Photo/{photoId:int}")]
-
+   // Asynchronous action method to set the main photo for the current user.
+   // Returns an ActionResult.
+   // <summary>Sets te main photo for the current user</summary>
    public async Task<ActionResult> setMain(int photoId)
    {
-      var user = await userRepository.GetUserByUsernameAsync(User.GetUsername());
+      // Retrieve the user from the repository using their username.
+      var user = await unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
+
+      //returns a BAd Request if the user is not Found
       if (user == null) return BadRequest("No user Has been Found");
+
+      //Retrieve the user's photo using the photo id
       var photo = user.Photos.FirstOrDefault(x => x.Id == photoId);
+
+      // returns a Bad Request if either the photo is not found or the photo is already the main 
       if (photo == null || photo.IsMain) return BadRequest("Cannot use this as main photo");
+
+      //Retrieves the current user main phtot 
       var currentMain = user.Photos.FirstOrDefault(x => x.IsMain);
+
+      //set the new photo to main and remove the current main photo
       if (currentMain != null) currentMain.IsMain = false;
       photo.IsMain = true;
-      if (await userRepository.SaveAllAsync()) return NoContent();
+
+      //If saving the user to the repository was successful return NoContent.
+      if (await unitOfWork.Complete()) return NoContent();
       return BadRequest("Failed to Update the main Photo");
    }
 
-   [HttpDelete("Delete-photo/{photoId}")]
-
+   [HttpDelete("delete-photo/{photoId:int}")]
    public async Task<ActionResult> DeletePhoto(int photoId)
    {
-      var user = await userRepository.GetUserByUsernameAsync(User.GetUsername());
-      if (user == null) return BadRequest("No user Has been Found");
-      var photo = user.Photos.FirstOrDefault(x => x.Id == photoId);
-      if (photo == null || photo.IsMain) return BadRequest("this photo cannot be deleted");
-
-
+     var user = await
+     unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
+      if (user == null) return BadRequest("User not found");
+      var photo = await unitOfWork.PhotoRepository.GetPhotoById(photoId);
+      if (photo == null || photo.IsMain) return BadRequest("This photo cannot be deleted");
       if (photo.PublicId != null)
       {
-         var results = await photoService.DeletePhotoAsync(photo.PublicId);
-         if (results.Error != null) return BadRequest(results.Error.Message);
-      };
+         var result = await photoService.DeletePhotoAsync(photo.PublicId);
+         if (result.Error != null) return BadRequest(result.Error.Message);
+      }
       user.Photos.Remove(photo);
-      if (await userRepository.SaveAllAsync()) return Ok();
-      return BadRequest("Problem Deleting Photo");
+      if (await unitOfWork.Complete()) return Ok();
+      return BadRequest("Problem deleting photo");
    }
 }

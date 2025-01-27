@@ -5,11 +5,26 @@
 namespace API.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class groupsadded : Migration
+    public partial class photomanagementadded : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.AlterColumn<string>(
+                name: "Url",
+                table: "Photos",
+                type: "TEXT",
+                nullable: true,
+                oldClrType: typeof(string),
+                oldType: "TEXT");
+
+            migrationBuilder.AddColumn<bool>(
+                name: "IsApproved",
+                table: "Photos",
+                type: "INTEGER",
+                nullable: false,
+                defaultValue: false);
+
             migrationBuilder.CreateTable(
                 name: "Groups",
                 columns: table => new
@@ -53,6 +68,20 @@ namespace API.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "Groups");
+
+            migrationBuilder.DropColumn(
+                name: "IsApproved",
+                table: "Photos");
+
+            migrationBuilder.AlterColumn<string>(
+                name: "Url",
+                table: "Photos",
+                type: "TEXT",
+                nullable: false,
+                defaultValue: "",
+                oldClrType: typeof(string),
+                oldType: "TEXT",
+                oldNullable: true);
         }
     }
 }
