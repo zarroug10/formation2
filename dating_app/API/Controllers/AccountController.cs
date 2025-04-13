@@ -55,6 +55,8 @@ ITokenService tokenService,
 
         var isPasswordValid = await userManager.CheckPasswordAsync(user, loginDto.Password);
         if (!isPasswordValid) return Unauthorized("Invalid password");
+        user.LastLogin = DateTime.Now;
+        await userManager.UpdateAsync(user);
 
         return new UserDTO
         {
@@ -63,6 +65,7 @@ ITokenService tokenService,
             KnownAs = user.KnownAs,
             Gender = user.Gender,
             photoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url,
+            LastLogin = user.LastLogin
         };
     }
 
@@ -70,6 +73,4 @@ ITokenService tokenService,
     {// a methode  to check of the username exists
         return await userManager.Users.AnyAsync(u => u.NormalizedUserName == username.ToUpper());// here is using the anyasync element to check if the element Username exisit or not 
     }
-
-
 }

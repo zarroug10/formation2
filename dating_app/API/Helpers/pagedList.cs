@@ -25,6 +25,6 @@ public class pagedList<T> : List<T>
         var items = await source.Skip((pageNumber - 1) * pageSize)
         .Take(pageSize).ToListAsync();
         return new pagedList<T>(items,count, pageNumber, pageSize);
-            }
+    }
 
 }

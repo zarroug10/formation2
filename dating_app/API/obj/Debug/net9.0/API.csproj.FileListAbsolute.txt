@@ -327,3 +327,11 @@ C:\Users\AbdelhafidhZARROUG\formation2\dating_app\API\bin\Debug\net9.0\Microsoft
 C:\Users\AbdelhafidhZARROUG\formation2\dating_app\API\bin\Debug\net9.0\Microsoft.Extensions.Logging.Abstractions.dll
 C:\Users\AbdelhafidhZARROUG\formation2\dating_app\API\bin\Debug\net9.0\Microsoft.Extensions.Options.dll
 C:\Users\AbdelhafidhZARROUG\formation2\dating_app\API\bin\Debug\net9.0\Microsoft.Extensions.Primitives.dll
+C:\Users\AbdelhafidhZARROUG\formation2\dating_app\API\bin\Debug\net9.0\API.staticwebassets.runtime.json
+C:\Users\AbdelhafidhZARROUG\formation2\dating_app\API\obj\Debug\net9.0\compressed\zzyd6wgwl5-xexpjawztq.gz
+C:\Users\AbdelhafidhZARROUG\formation2\dating_app\API\obj\Debug\net9.0\compressed\6x0scahnf1-vagikyz9qx.gz
+C:\Users\AbdelhafidhZARROUG\formation2\dating_app\API\obj\Debug\net9.0\compressed\1dpm1p8bmc-4h04by3t0o.gz
+C:\Users\AbdelhafidhZARROUG\formation2\dating_app\API\obj\Debug\net9.0\compressed\4xubg2q5u6-98dddlaxt0.gz
+C:\Users\AbdelhafidhZARROUG\formation2\dating_app\API\obj\Debug\net9.0\compressed\ipsy3anybd-dosqy3kf6t.gz
+C:\Users\AbdelhafidhZARROUG\formation2\dating_app\API\obj\Debug\net9.0\compressed\wsenxafarw-39tegmrjtp.gz
+C:\Users\AbdelhafidhZARROUG\formation2\dating_app\API\obj\Debug\net9.0\compressed\t6b8kyhypi-jt5vfomv3k.gz

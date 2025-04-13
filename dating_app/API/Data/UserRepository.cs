@@ -72,7 +72,7 @@ public class UserRepository(DataContext context, IMapper mapper) : IUserReposito
         .FirstOrDefaultAsync();
     }
 
-    async Task<IEnumerable<AppUser>> IUserRepository.GetAllAsync()
+    public async Task<IEnumerable<AppUser>> IUserRepository.GetAllAsync()
     {
         return await context.Users
         .Include(x => x.Photos)

@@ -16,6 +16,7 @@ public class AppUser : IdentityUser<int>
     public string? LookingFor { get; set; }
     public required string City { get; set; }
     public required string Country { get; set; }
+     public DateTime? LastLogin { get; set; }
     public  List<Photo> Photos { get; set; } =[];
     public List<UserLike> LikedBy{ get; set; } = [];
     public List<UserLike> LikedUsers { get; set; } = [];

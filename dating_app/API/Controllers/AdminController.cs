@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers;
 
-public class AdminController(UserManager<AppUser> userManager, IUnitOfWork unitOfWork, PhotoService photoService) : BaseApiCOntroller
+public class AdminController(UserManager<AppUser> userManager, IUnitOfWork unitOfWork, IPhotoService photoService) : BaseApiCOntroller
 {
     // Authorized with the policy of only  Admin Role are required and allowed to access this data 
     [Authorize(Policy = "RequireAdminRole")]
@@ -114,14 +114,14 @@ public class AdminController(UserManager<AppUser> userManager, IUnitOfWork unitO
     }
 
     [Authorize(Policy = "ModeratePhotoRole")]
-    [HttpPost("aprove")]
+    [HttpGet]
     public async Task<ActionResult<PhotoForApprovalDto>> Getphotos()
     {
         var photos = await unitOfWork.PhotoRepository.GetUnapprovedPhotos();
 
         return Ok(photos);
     }
-    // omitted
+    
     [Authorize(Policy = "ModeratePhotoRole")]
     [HttpPost("reject-photo/{photoId}")]
     public async Task<ActionResult> RejectPhoto(int photoId)

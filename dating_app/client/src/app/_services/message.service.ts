@@ -85,7 +85,7 @@ export class MessageService {
     return this.hubConnection?.invoke('SendMessage', {recipientUsername:username, content})
   }
 
-  deleteMessage(id:number)
+  deleteMessage(id:string)
   {
     return this.http.delete(this.baseUrl +'messages/' + id);
   }

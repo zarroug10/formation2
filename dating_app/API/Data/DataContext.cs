@@ -49,7 +49,7 @@ IdentityUserToken<int>>(options) //class for datacontext the uses the dependency
         .HasOne(s => s.TorgetUser)// has one TorgetUser 
         .WithMany(l => l.LikedBy)// with many likeby
         .HasForeignKey(k => k.TargetUserId)//  and a TargetUserId ForeignKey
-        .OnDelete(DeleteBehavior.Cascade);
+        .OnDelete(DeleteBehavior.NoAction);
 
         Builder.Entity<Message>()//Build an Message Entity
         .HasKey(k => new { k.Id });//Has Id as it's key

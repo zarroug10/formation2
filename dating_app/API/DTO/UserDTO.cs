@@ -9,4 +9,5 @@ public class UserDTO // User dto file that use to carry the necessary data objec
     public required string KnownAs { get; set; }
     public required string Gender { get; set; }
     public string? photoUrl { get; set; }
+    public DateTime? LastLogin { get; set; }
 }

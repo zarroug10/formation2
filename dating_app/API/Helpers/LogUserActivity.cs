@@ -36,6 +36,7 @@ public class LogUserActivity : IAsyncActionFilter
         
         // update the user Last active prop to the current datetime
         user.LastActive = DateTime.UtcNow;
+        
 
         //save the updated Last active to database 
         await repo.Complete();
