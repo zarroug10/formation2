@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+
+
 import { RegisterComponent } from "../register/register.component";
 
 @Component({

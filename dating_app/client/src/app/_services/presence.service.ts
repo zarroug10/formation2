@@ -1,10 +1,16 @@
-import { inject, Injectable, signal } from '@angular/core';
-import { environment } from '../../environments/environment';
-import { HubConnection, HubConnectionBuilder, HubConnectionState } from '@microsoft/signalr';
-import { ToastrService } from 'ngx-toastr';
-import { User } from '../_models/User';
-import { take } from 'rxjs';
 import { Router } from '@angular/router';
+import { inject, Injectable, signal } from '@angular/core';
+
+
+import { ToastrService } from 'ngx-toastr';
+import { take } from 'rxjs';
+
+
+import { HubConnection, HubConnectionBuilder, HubConnectionState } from '@microsoft/signalr';
+
+
+import { User } from '../_models/User';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',

@@ -1,6 +1,8 @@
 using System;
-using API.Extensions;
+
 using Microsoft.AspNetCore.Identity;
+
+using API.Extensions;
 
 namespace API.Entities; // namespace makes all the files that has the same name space visble to one another
 

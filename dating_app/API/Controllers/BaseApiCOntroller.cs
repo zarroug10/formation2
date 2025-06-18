@@ -1,7 +1,9 @@
 using System;
-using API.Helpers;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+
+using API.Helpers;
 
 namespace API.Controllers; //the name space is essential to make the files visible to each other
 

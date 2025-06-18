@@ -1,17 +1,17 @@
 using System;
 using System.Security.Cryptography;
 using System.Text;
-using API.Data;
 
-
-using API.DTO;
-using API.Entities;
-using API.interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+
+using API.DTO;
+using API.Data;
+using API.Entities;
+using API.interfaces;
 
 namespace API.Controllers;// name space is valuable to make the files with similar name space visble to each other 
 [AllowAnonymous]

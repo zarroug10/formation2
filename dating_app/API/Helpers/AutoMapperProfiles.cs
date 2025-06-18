@@ -1,9 +1,11 @@
 using System;
+
+using AutoMapper;
+using CloudinaryDotNet;
+
 using API.DTO;
 using API.Entities;
 using API.Extensions;
-using AutoMapper;
-using CloudinaryDotNet;
 
 namespace API.Helpers;
 

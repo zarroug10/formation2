@@ -1,8 +1,10 @@
 using System;
-using API.Extensions;
-using API.interfaces;
+
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc.Filters;
+
+using API.Extensions;
+using API.interfaces;
 
 namespace API.Helpers;
 

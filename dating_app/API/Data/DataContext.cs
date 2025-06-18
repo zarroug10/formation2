@@ -1,8 +1,10 @@
 using System;
-using API.Entities;
-using Microsoft.AspNetCore.Identity;
+
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+
+using API.Entities;
 
 namespace API.Data;// namespace is used to make all the file visible to each other
 

@@ -1,14 +1,16 @@
 using System;
 using System.Security.Claims;
-using API.Data;
+
+using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+
 using API.DTO;
+using API.Data;
 using API.Entities;
 using API.Extensions;
 using API.Helpers;
 using API.interfaces;
-using AutoMapper;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers; //name space is valuable for creating a connected files without the name space the file is not visivble toeach other
 

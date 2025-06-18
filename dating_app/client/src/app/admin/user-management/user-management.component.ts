@@ -1,9 +1,13 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { AdminService } from '../../_services/admin.service';
-import { User } from '../../_models/User';
+
+
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
-import { RolesModalComponent } from '../../modals/roles-modal/roles-modal.component';
 import { initialState } from 'ngx-bootstrap/timepicker/reducer/timepicker.reducer';
+
+
+import { AdminService } from '../../_services/admin.service';
+import { RolesModalComponent } from '../../modals/roles-modal/roles-modal.component';
+import { User } from '../../_models/User';
 
 @Component({
   selector: 'app-user-management',

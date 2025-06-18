@@ -1,8 +1,10 @@
 using System;
 using System.Net;
 using System.Text.Json;
-using API.Errors;
+
 using Microsoft.OpenApi.Exceptions;
+
+using API.Errors;
 
 namespace API.Middleware; // name sapce to  prevent naming conflicts
 

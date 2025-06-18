@@ -1,17 +1,23 @@
-import { Component, inject, OnDestroy, OnInit, ViewChild, viewChild } from '@angular/core';
-import { Member } from '../../_models/Member';
-import { TabDirective, TabsetComponent, TabsModule } from 'ngx-bootstrap/tabs';
 import { ActivatedRoute, Router } from '@angular/router';
-import { GalleryItem, GalleryModule, ImageItem } from 'ng-gallery';
-import { TimeagoModule } from 'ngx-timeago';
+import { Component, inject, OnDestroy, OnInit, ViewChild, viewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
+
+
+import { GalleryItem, GalleryModule, ImageItem } from 'ng-gallery';
+import { TabDirective, TabsetComponent, TabsModule } from 'ngx-bootstrap/tabs';
+import { TimeagoModule } from 'ngx-timeago';
+
+
+import { HubConnectionState } from '@microsoft/signalr';
+
+
+import { AccountService } from '../../_services/account.service';
+import { Member } from '../../_models/Member';
 import { MemberMessagesComponent } from "../member-messages/member-messages.component";
+import { MembersService } from '../../_services/members.service';
 import { Message } from '../../_models/Message';
 import { MessageService } from '../../_services/message.service';
 import { PresenceService } from '../../_services/presence.service';
-import { AccountService } from '../../_services/account.service';
-import { HubConnectionState } from '@microsoft/signalr';
-import { MembersService } from '../../_services/members.service';
 
 @Component({
   selector: 'app-member-details',

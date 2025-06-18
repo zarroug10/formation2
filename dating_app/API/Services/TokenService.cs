@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using API.Entities;
-using API.interfaces;
+
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
+
+using API.Entities;
+using API.interfaces;
 
 namespace API.Services; // name spaceto prevent the naming conflict between the files 
 

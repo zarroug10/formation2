@@ -1,10 +1,14 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, inject, Input, OnInit, Output } from '@angular/core';
-import { NavComponent } from "./nav/nav.component";
+import { HttpClient } from '@angular/common/http';
+import { RouterOutlet } from '@angular/router';
+
+
+import { NgxSpinnerComponent } from 'ngx-spinner';
+
+
 import { AccountService } from './_services/account.service';
 import { HomeComponent } from "./home/home.component";
-import { RouterOutlet } from '@angular/router';
-import { NgxSpinnerComponent } from 'ngx-spinner';
+import { NavComponent } from "./nav/nav.component";
 
 @Component({
   selector: 'app-root',

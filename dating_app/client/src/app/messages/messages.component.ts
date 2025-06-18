@@ -1,11 +1,15 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { MessageService } from '../_services/message.service';
-import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { FormsModule } from '@angular/forms';
-import { TimeagoModule } from 'ngx-timeago';
-import { Message } from '../_models/Message';
 import { RouterLink } from '@angular/router';
+
+
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { TimeagoModule } from 'ngx-timeago';
+
+
+import { Message } from '../_models/Message';
+import { MessageService } from '../_services/message.service';
 
 @Component({
   selector: 'app-messages',

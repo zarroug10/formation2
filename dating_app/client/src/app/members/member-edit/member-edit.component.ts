@@ -1,14 +1,18 @@
 import { Component, HostListener, inject, OnInit, ViewChild } from '@angular/core';
-import { Member } from '../../_models/Member';
-import { AccountService } from '../../_services/account.service';
-import { MembersService } from '../../_services/members.service';
+import { DatePipe } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+
+
 import { TabsModule } from 'ngx-bootstrap/tabs';
-import { ToastrService } from 'ngx-toastr';
-import { PhotoEditorComponent } from "../photo-editor/photo-editor.component";
 import { TimeagoModule } from 'ngx-timeago';
-import { DatePipe } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
+
+
+import { AccountService } from '../../_services/account.service';
+import { Member } from '../../_models/Member';
+import { MembersService } from '../../_services/members.service';
+import { PhotoEditorComponent } from "../photo-editor/photo-editor.component";
 
 @Component({
   selector: 'app-member-edit',

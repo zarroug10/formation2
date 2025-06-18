@@ -1,18 +1,20 @@
 import { Routes } from '@angular/router';
+
+
+import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { HomeComponent } from './home/home.component';
-import { MembersListComponent } from './members/members-list/members-list.component';
-import { MemberDetailsComponent } from './members/member-details/member-details.component';
 import { ListsComponent } from './lists/lists.component';
+import { MemberDetailsComponent } from './members/member-details/member-details.component';
+import { MemberEditComponent } from './members/member-edit/member-edit.component';
+import { MembersListComponent } from './members/members-list/members-list.component';
 import { MessagesComponent } from './messages/messages.component';
-import { authGuard } from './_guards/auth.guard';
-import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
-import { MemberEditComponent } from './members/member-edit/member-edit.component';
-import { preveventUnsavedChangesGuard } from './_guards/prevevent-unsaved-changes.guard';
-import { memberDetailedResolver } from './_resolvers/member-detailed.resolver';
-import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
+import { TestErrorsComponent } from './errors/test-errors/test-errors.component';
 import { adminGuard } from './_guards/admin.guard';
+import { authGuard } from './_guards/auth.guard';
+import { memberDetailedResolver } from './_resolvers/member-detailed.resolver';
+import { preveventUnsavedChangesGuard } from './_guards/prevevent-unsaved-changes.guard';
 
 export const routes: Routes = [
     {path:'',component:HomeComponent},

@@ -1,9 +1,12 @@
 using System;
+
+using CloudinaryDotNet.Actions;
+using CloudinaryDotNet;
+using Microsoft.Extensions.Options;
+using var stream = file.OpenReadStream() ;
+
 using API.Helpers;
 using API.interfaces;
-using CloudinaryDotNet;
-using CloudinaryDotNet.Actions;
-using Microsoft.Extensions.Options;
 
 namespace API.Services;
 
@@ -22,8 +25,7 @@ public class PhotoService : IPhotoService
         var uploadResults = new ImageUploadResult() ;
         if (file.Length > 0)
         {
-            using var stream = file.OpenReadStream() ;
-            var uploadParams = new ImageUploadParams
+var uploadParams = new ImageUploadParams
             {
                 File = new FileDescription(file.FileName,stream),
                 Transformation = new Transformation() 

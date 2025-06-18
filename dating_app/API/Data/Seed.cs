@@ -1,8 +1,10 @@
 using System;
 using System.Text.Json;
-using API.Entities;
+
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+
+using API.Entities;
 
 namespace API.Data;
 

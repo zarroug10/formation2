@@ -1,10 +1,10 @@
 import { Component, computed, inject, input } from '@angular/core';
-import { Member } from '../../_models/Member';
 import { RouterLink } from '@angular/router';
+
+
 import { LikesService } from '../../_services/likes.service';
+import { Member } from '../../_models/Member';
 import { PresenceService } from '../../_services/presence.service';
-
-
 
 @Component({
   selector: 'app-member-card',

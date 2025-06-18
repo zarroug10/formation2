@@ -1,8 +1,12 @@
 import { AfterContentInit, AfterViewChecked, Component, inject, input, ViewChild } from '@angular/core';
-import { MessageService } from '../../_services/message.service';
-import { TimeagoModule } from 'ngx-timeago';
 import { FormsModule, NgForm } from '@angular/forms';
+
+
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import { TimeagoModule } from 'ngx-timeago';
+
+
+import { MessageService } from '../../_services/message.service';
 
 @Component({
   selector: 'app-member-messages',

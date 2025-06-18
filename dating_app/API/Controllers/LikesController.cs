@@ -1,10 +1,12 @@
 using System;
+
+using Microsoft.AspNetCore.Mvc;
+
 using API.DTO;
 using API.Entities;
 using API.Extensions;
 using API.Helpers;
 using API.interfaces;
-using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
 

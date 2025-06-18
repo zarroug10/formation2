@@ -1,7 +1,9 @@
 {
   "ExpandedNodes": [
     "",
-    "\\dating_app"
+    "\\dating_app",
+    "\\dating_app\\API",
+    "\\dating_app\\API\\Controllers"
   ],
   "PreviewInSolutionExplorer": false
 }

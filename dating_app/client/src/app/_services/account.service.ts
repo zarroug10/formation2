@@ -1,10 +1,14 @@
 import { HttpClient } from '@angular/common/http';
 import { computed, inject, Injectable, model, signal } from '@angular/core';
-import { User } from '../_models/User';
+
+
 import { map } from 'rxjs';
-import { environment } from '../../environments/environment';
+
+
 import { LikesService } from './likes.service';
 import { PresenceService } from './presence.service';
+import { User } from '../_models/User';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root'

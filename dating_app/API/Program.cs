@@ -1,12 +1,14 @@
 using System.Text;
+
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using API.SignalR;
+using var scope = app.Services.CreateScope();
+
 using API.Data;
 using API.Entities;
 using API.Extensions;
 using API.Middleware;
-
+using API.SignalR;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -34,8 +36,6 @@ app.MapControllers();
 app.MapHub<PresenceHub>("hubs/presence");
 app.MapHub<MessageHub>("hubs/message");
 app.MapFallbackToController("Index","Fallback");
-
-using var scope = app.Services.CreateScope();
 var service = scope.ServiceProvider;
 try
 {

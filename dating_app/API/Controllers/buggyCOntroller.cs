@@ -1,8 +1,10 @@
 using System;
-using API.Data;
-using API.Entities;
+
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+
+using API.Data;
+using API.Entities;
 
 namespace API.Controllers; // namesace which is used to make the files on the same namespace vsisible to each other
 

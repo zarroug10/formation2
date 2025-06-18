@@ -1,7 +1,9 @@
 using System;
+
+using Microsoft.AspNetCore.Mvc;
+
 using API.DTO;
 using API.Entities;
-using Microsoft.AspNetCore.Mvc;
 
 namespace API.interfaces;
 

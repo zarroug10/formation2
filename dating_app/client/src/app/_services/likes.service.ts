@@ -1,9 +1,11 @@
-import { inject, Injectable, signal } from '@angular/core';
-import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { inject, Injectable, signal } from '@angular/core';
+
+
 import { Member } from '../_models/Member';
-import { setpaginatedResponse, setPaginationHeaders } from './paginationHelper';
+import { environment } from '../../environments/environment';
 import { paginationResults } from '../_models/Pagination';
+import { setpaginatedResponse, setPaginationHeaders } from './paginationHelper';
 
 @Injectable({
   providedIn: 'root'

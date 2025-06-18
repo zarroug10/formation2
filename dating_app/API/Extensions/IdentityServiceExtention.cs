@@ -1,10 +1,12 @@
 using System;
 using System.Text;
-using API.Data;
-using API.Entities;
+
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
+
+using API.Data;
+using API.Entities;
 
 namespace API.Extensions;// name sapce that makes all the files containing it visible to one another
 

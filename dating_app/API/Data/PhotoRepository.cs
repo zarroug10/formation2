@@ -1,10 +1,12 @@
 using System;
-using API.DTO;
-using API.Entities;
-using API.interfaces;
+
 using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+
+using API.DTO;
+using API.Entities;
+using API.interfaces;
 
 namespace API.Data;
 
